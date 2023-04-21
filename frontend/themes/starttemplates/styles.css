@@ -1,1 +1,18 @@
 @import url('./main-layout.css');
+
+vaadin-tabsheet.horizontal-space-large::part(tabs-container) {
+    padding-left: var(--lumo-space-l);
+    padding-right: var(--lumo-space-l);
+}
+
+vaadin-tabsheet.card-style::part(content) {
+    background: var(--lumo-contrast-5pct);
+    padding: var(--lumo-space-l);
+}
+
+vaadin-tabsheet.card-style .tab-content {
+    background: var(--lumo-base-color);
+    box-sizing: border-box;
+    border: 1px solid var(--lumo-contrast-10pct);
+    border-radius: var(--lumo-border-radius-l);
+}

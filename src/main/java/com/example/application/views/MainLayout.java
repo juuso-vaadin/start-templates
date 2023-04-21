@@ -4,7 +4,7 @@ package com.example.application.views;
 import com.example.application.components.appnav.AppNav;
 import com.example.application.components.appnav.AppNavItem;
 import com.example.application.views.filtermasterdetail.FilterMasterDetailView;
-import com.example.application.views.itemview.ItemViewView;
+import com.example.application.views.itemview.ItemView;
 import com.example.application.views.listitemdetail.ListItemDetailView;
 import com.example.application.views.searchresults.SearchResultsView;
 import com.example.application.views.wizard.WizardView;
@@ -57,7 +57,7 @@ public class MainLayout extends AppLayout {
         // For documentation, visit https://github.com/vaadin/vcf-nav#readme
         AppNav nav = new AppNav();
 
-        nav.addItem(new AppNavItem("Item View", ItemViewView.class, LineAwesomeIcon.ADDRESS_CARD.create()));
+        nav.addItem(new AppNavItem("Item View", ItemView.class, LineAwesomeIcon.ADDRESS_CARD.create()));
         nav.addItem(new AppNavItem("Filter - Master - Detail", FilterMasterDetailView.class,
                 LineAwesomeIcon.COLUMNS_SOLID.create()));
         nav.addItem(new AppNavItem("List - Item - Detail", ListItemDetailView.class,
