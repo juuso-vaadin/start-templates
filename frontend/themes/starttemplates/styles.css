@@ -1,4 +1,5 @@
 @import url('./main-layout.css');
+@import url('./list-item-detail-view.css');
 
 vaadin-tabsheet.horizontal-space-large::part(tabs-container) {
     padding-left: var(--lumo-space-l);
@@ -15,4 +16,24 @@ vaadin-tabsheet.card-style .tab-content {
     box-sizing: border-box;
     border: 1px solid var(--lumo-contrast-10pct);
     border-radius: var(--lumo-border-radius-l);
+}
+
+vaadin-horizontal-layout.line-separators {
+    gap: calc(var(--lumo-space-m) * 2);
+}
+
+vaadin-horizontal-layout.line-separators > * {
+    position: relative;
+}
+
+vaadin-horizontal-layout.line-separators > *:not(:last-child):after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    background-color: var(--lumo-contrast-20pct);
+    width: 1px;
+    height: var(--lumo-font-size-m);
+    right: calc(var(--lumo-space-m) * -1);
+    top: 50%;
+    transform: translateY(-50%);
 }

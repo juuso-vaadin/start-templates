@@ -3,6 +3,7 @@ package com.example.application.views.itemview;
 import com.example.application.components.keyvaluepair.KeyValuePair;
 import com.example.application.components.keyvaluepair.KeyValuePairs;
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
@@ -23,25 +24,43 @@ public class ItemView extends VerticalLayout {
 
     private H2 itemTitle;
     private Span itemSubtitle;
+    private VerticalLayout tabContent;
 
     public ItemView() {
         setSizeFull();
         setPadding(false);
         setSpacing(false);
-        add(createHeader());
-        add(createContent());
-    }
 
-    private VerticalLayout createHeader() {
+        // View header
+        HorizontalLayout headlineWithActions = createHeadlineWithActions("Logitech MX Keys", "Keyboard");
+        DescriptionList itemSummary = createItemSummary();
+
         VerticalLayout itemHeader = new VerticalLayout();
         itemHeader.addClassNames(LumoUtility.Padding.Horizontal.XLARGE, LumoUtility.Padding.Top.XLARGE);
+        itemHeader.add(headlineWithActions, itemSummary);
+        add(itemHeader);
 
+        // View content
+        TabSheet itemContent = new TabSheet();
+        itemContent.setWidthFull();
+        itemContent.addClassName(LumoUtility.Flex.GROW);
+        itemContent.addClassName("horizontal-space-large");
+        // Style variant for displaying content as card
+        //itemContent.addClassName("card-style");
+
+        itemContent.add(new Tab("Specifications"), createSpecificationsTabContent());
+        itemContent.add(new Tab("Stock balance"), createEmptyTabContent());
+        itemContent.add(new Tab("Order history"), createEmptyTabContent());
+        add(itemContent);
+    }
+
+    private HorizontalLayout createHeadlineWithActions(String title, String subtitle) {
         HorizontalLayout itemHeaderIdentifier = new HorizontalLayout();
         itemHeaderIdentifier.setWidthFull();
         itemHeaderIdentifier.setAlignItems(Alignment.BASELINE);
         itemHeaderIdentifier.addClassName(LumoUtility.Gap.SMALL);
-        itemTitle = new H2("Logitech MX Keys");
-        itemSubtitle = new Span("Keyboard");
+        itemTitle = new H2(title);
+        itemSubtitle = new Span(subtitle);
         itemSubtitle.addClassName(LumoUtility.TextColor.SECONDARY);
         FlexLayout itemTitles = new FlexLayout(itemTitle, itemSubtitle);
         itemTitles.setFlexWrap(FlexLayout.FlexWrap.WRAP);
@@ -56,30 +75,37 @@ public class ItemView extends VerticalLayout {
         itemActions.add(closeBtn, editBtn);
 
         itemHeaderIdentifier.add(itemTitles, itemActions);
+        return itemHeaderIdentifier;
+    }
 
+    private DescriptionList createItemSummary() {
         DescriptionList itemSummary = new DescriptionList();
+
         itemSummary.addClassNames(LumoUtility.Display.FLEX, LumoUtility.Gap.XLARGE, LumoUtility.Margin.NONE);
         KeyValuePair productNumber = new KeyValuePair("Product number", "920-009411");
+
         productNumber.setKeyPosition(KeyValuePair.KeyPosition.TOP);
         KeyValuePair rating = new KeyValuePair("Rating", "4.6 / 5");
+
         rating.setKeyPosition(KeyValuePair.KeyPosition.TOP);
         Span stockBalanceBadge = new Span("16 items");
         stockBalanceBadge.getElement().getThemeList().add("badge success");
         KeyValuePair stockBalance = new KeyValuePair("Stock balance", stockBalanceBadge);
         stockBalance.setKeyPosition(KeyValuePair.KeyPosition.TOP);
         itemSummary.add(productNumber, rating, stockBalance);
-
-        itemHeader.add(itemHeaderIdentifier, itemSummary);
-        return itemHeader;
+        return itemSummary;
     }
 
-    private TabSheet createContent() {
-        TabSheet itemContent = new TabSheet();
-        itemContent.setWidthFull();
-        itemContent.addClassName(LumoUtility.Flex.GROW);
-        itemContent.addClassName("horizontal-space-large");
-        // Style variant for displaying content as card
-        //itemContent.addClassName("card-style");
+    private Component createEmptyTabContent() {
+        tabContent = new VerticalLayout(new Span("Nothing here"));
+        tabContent.addClassNames("tab-content");
+        tabContent.addClassNames(LumoUtility.Padding.LARGE, LumoUtility.Margin.Horizontal.AUTO);
+        tabContent.setMaxWidth("1200px");
+
+        return tabContent;
+    }
+
+    private Component createSpecificationsTabContent() {
         Paragraph itemDescription = new Paragraph("Designed for creatives & engineered for coders. Features easy switch pairing with 3 devices. Compatible with Win, Mac, Linux, iOS & Android OS");
         itemDescription.addClassNames(LumoUtility.FontSize.XLARGE, LumoUtility.Flex.GROW);
         itemDescription.getElement().setAttribute("style", "flex-basis: 60%;");
@@ -91,9 +117,9 @@ public class ItemView extends VerticalLayout {
             LumoUtility.Height.AUTO,
             LumoUtility.Overflow.HIDDEN
         );
+        itemImage.getElement().setAttribute("style", "flex-basis: 40%;");
         itemImage.setMinWidth("12rem");
         itemImage.setMaxWidth("20rem");
-        itemImage.getElement().setAttribute("style", "flex-basis: 40%;");
         FlexLayout itemContentHead = new FlexLayout(itemDescription, itemImage);
         itemContentHead.setAlignItems(Alignment.CENTER);
         itemContentHead.setFlexWrap(FlexLayout.FlexWrap.WRAP);
@@ -152,16 +178,12 @@ public class ItemView extends VerticalLayout {
         itemContentBody.addClassName(LumoUtility.Gap.Row.XLARGE);
         itemContentBody.setFlexWrap(FlexLayout.FlexWrap.WRAP);
 
-        VerticalLayout specificationsTabContent = new VerticalLayout(itemContentHead, itemContentBody);
-        specificationsTabContent.addClassNames("tab-content");
-        specificationsTabContent.addClassNames(LumoUtility.Padding.LARGE, LumoUtility.Margin.Horizontal.AUTO);
-        specificationsTabContent.setMaxWidth("1200px");
-        itemContent.add(new Tab("Specifications"), specificationsTabContent);
+        tabContent = new VerticalLayout(itemContentHead, itemContentBody);
+        tabContent.addClassNames("tab-content");
+        tabContent.addClassNames(LumoUtility.Padding.LARGE, LumoUtility.Margin.Horizontal.AUTO);
+        tabContent.setMaxWidth("1200px");
 
-        itemContent.add(new Tab("Stock balance"), new Span("Nothing here"));
-        itemContent.add(new Tab("Order history"), new Span("Nothing here either"));
-
-        return itemContent;
+        return tabContent;
     }
 
 }
