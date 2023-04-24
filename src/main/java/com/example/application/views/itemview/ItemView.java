@@ -26,6 +26,9 @@ public class ItemView extends VerticalLayout {
     private Span itemSubtitle;
     private VerticalLayout tabContent;
 
+    public Button closeBtn = new Button("Close");
+    public Button messagesBtn = new Button("Messages");
+
     public ItemView() {
         setSizeFull();
         setPadding(false);
@@ -69,10 +72,9 @@ public class ItemView extends VerticalLayout {
 
         FlexLayout itemActions = new FlexLayout();
         itemActions.addClassNames(LumoUtility.Margin.Left.AUTO, LumoUtility.Gap.SMALL);
-        Button closeBtn = new Button("Close");
         Button editBtn = new Button("Edit");
         editBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        itemActions.add(closeBtn, editBtn);
+        itemActions.add(messagesBtn, closeBtn, editBtn);
 
         itemHeaderIdentifier.add(itemTitles, itemActions);
         return itemHeaderIdentifier;
