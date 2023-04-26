@@ -1,0 +1,14 @@
+@media screen and (max-width: 800px) {
+    .item-view .item-header {
+        padding-top: var(--lumo-space-m);
+        padding-left: var(--lumo-space-m);
+        padding-right: var(--lumo-space-m);
+    }
+
+    .item-view .tab-content {
+        padding-top: var(--lumo-space-s);
+        padding-bottom: var(--lumo-space-m);
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

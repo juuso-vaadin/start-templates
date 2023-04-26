@@ -168,7 +168,9 @@ public class ListItemDetailView extends SplitLayout {
         itemTitles.addClassName(LumoUtility.Gap.MEDIUM);
 
         Button closeMessagesBtn = new Button(LumoIcon.CROSS.create());
-        closeMessagesBtn.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        closeMessagesBtn.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        closeMessagesBtn.getElement().setAttribute("aria-label", "Close");
+        closeMessagesBtn.setTooltipText("Close");
         closeMessagesBtn.addClassName(LumoUtility.Margin.Left.AUTO);
         closeMessagesBtn.addClickListener(e -> {
             itemDetailLayout.setSplitterPosition(100);

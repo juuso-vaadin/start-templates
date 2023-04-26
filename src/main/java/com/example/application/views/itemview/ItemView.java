@@ -15,6 +15,7 @@ import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 @PageTitle("Item View")
@@ -26,10 +27,12 @@ public class ItemView extends VerticalLayout {
     private Span itemSubtitle;
     private VerticalLayout tabContent;
 
-    public Button closeBtn = new Button("Close");
+    public Button closeBtn = new Button(LumoIcon.CROSS.create());
     public Button messagesBtn = new Button("Messages");
+    public Button editBtn = new Button("Edit");
 
     public ItemView() {
+        setClassName("item-view");
         setSizeFull();
         setPadding(false);
         setSpacing(false);
@@ -39,6 +42,7 @@ public class ItemView extends VerticalLayout {
         DescriptionList itemSummary = createItemSummary();
 
         VerticalLayout itemHeader = new VerticalLayout();
+        itemHeader.addClassName("item-header");
         itemHeader.addClassNames(LumoUtility.Padding.Horizontal.XLARGE, LumoUtility.Padding.Top.XLARGE);
         itemHeader.add(headlineWithActions, itemSummary);
         add(itemHeader);
@@ -68,13 +72,16 @@ public class ItemView extends VerticalLayout {
         FlexLayout itemTitles = new FlexLayout(itemTitle, itemSubtitle);
         itemTitles.setFlexWrap(FlexLayout.FlexWrap.WRAP);
         itemTitles.setAlignItems(Alignment.BASELINE);
-        itemTitles.addClassName(LumoUtility.Gap.MEDIUM);
+        itemTitles.addClassName(LumoUtility.Gap.Column.MEDIUM);
 
         FlexLayout itemActions = new FlexLayout();
         itemActions.addClassNames(LumoUtility.Margin.Left.AUTO, LumoUtility.Gap.SMALL);
-        Button editBtn = new Button("Edit");
+        editBtn = new Button("Edit");
         editBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        itemActions.add(messagesBtn, closeBtn, editBtn);
+        closeBtn.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        closeBtn.getElement().setAttribute("aria-label", "Close");
+        closeBtn.setTooltipText("Close");
+        itemActions.add(editBtn, messagesBtn, closeBtn);
 
         itemHeaderIdentifier.add(itemTitles, itemActions);
         return itemHeaderIdentifier;
@@ -98,6 +105,7 @@ public class ItemView extends VerticalLayout {
         return itemSummary;
     }
 
+
     private Component createEmptyTabContent() {
         tabContent = new VerticalLayout(new Span("Nothing here"));
         tabContent.addClassNames("tab-content");
@@ -120,7 +128,7 @@ public class ItemView extends VerticalLayout {
             LumoUtility.Overflow.HIDDEN
         );
         itemImage.getElement().setAttribute("style", "flex-basis: 40%;");
-        itemImage.setMinWidth("12rem");
+        itemImage.setMinWidth("14rem");
         itemImage.setMaxWidth("20rem");
         FlexLayout itemContentHead = new FlexLayout(itemDescription, itemImage);
         itemContentHead.setAlignItems(Alignment.CENTER);

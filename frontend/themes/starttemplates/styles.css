@@ -1,9 +1,12 @@
 @import url('./main-layout.css');
+@import url('./item-view.css');
 @import url('./list-item-detail-view.css');
 
-vaadin-tabsheet.horizontal-space-large::part(tabs-container) {
-    padding-left: var(--lumo-space-l);
-    padding-right: var(--lumo-space-l);
+@media screen and (min-width: 800px) {
+    vaadin-tabsheet.horizontal-space-large::part(tabs-container) {
+        padding-left: var(--lumo-space-l);
+        padding-right: var(--lumo-space-l);
+    }
 }
 
 vaadin-tabsheet.card-style::part(content) {
