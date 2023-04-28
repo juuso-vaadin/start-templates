@@ -59,8 +59,6 @@ public class ListItemDetailView extends SplitLayout {
     }
 
     public ListItemDetailView() {
-        initWindowResizeListener();
-
         setSizeFull();
         addThemeVariants(SplitLayoutVariant.LUMO_SMALL);
 
