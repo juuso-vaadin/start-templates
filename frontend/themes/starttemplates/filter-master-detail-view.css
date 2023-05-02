@@ -1,0 +1,36 @@
+.filters-collapsed .filters-content > *:not(.filters-header),
+.filters-collapsed .filters-content .clear-button {
+    display: none;
+}
+
+.filters-collapsed vaadin-split-layout.outer-split::part(splitter) {
+    pointer-events: none;
+}
+
+@media screen and (min-width: 800px) {
+    .filters-collapsed .filters-content .filters-header h3 {
+        display: none;
+    }
+
+    body:not(.filters-collapsed) .filters-content {
+        min-width: 12rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .filters-collapsed .filters-content {
+        justify-content: center;
+    }
+
+    .filters-collapsed .filters-content .filters-header {
+        padding-bottom: 0;
+    }
+
+    .filters-content .filters-header h3 {
+        font-size: var(--lumo-font-size-m);
+    }
+
+    .filters-collapsed .filters-content .clear-button {
+        display: inline-block;
+    }
+}

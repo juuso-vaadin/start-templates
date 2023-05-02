@@ -1,6 +1,7 @@
 @import url('./main-layout.css');
 @import url('./item-view.css');
 @import url('./list-item-detail-view.css');
+@import url('./filter-master-detail-view.css');
 
 @media screen and (min-width: 800px) {
     vaadin-tabsheet.horizontal-space-large::part(tabs-container) {
